@@ -1,0 +1,205 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card1{
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="card">
+   
+    </div>
+
+    <script>
+      let card =document.getElementById("card");
+      function dots(a){
+        if(str.length<50){
+            // card.innerHTML += `<h1> ${str}</h1>`;
+            return str;
+        }
+        else{
+            let res=str.slice(0,50);
+            // card.innerHTML += `<h1> ${res}...</h1>`;
+            return res + "....";
+        }
+      }
+      let str="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum assumenda labore corporis sunt, repudiandae ad minima earum blanditiis repellendus officiis voluptates corrupti ipsum ab amet quisquam dignissimos, nisi dicta aliquam.";
+    //   dots(str);
+      card.innerHTML += `
+      <div class="card1">
+         <img src="https://cdn.pixabay.com/photo/2024/04/29/04/21/tshirt-8726716_1280.jpg" alt="Image" style="width:50%; height:50%;">
+         <p>${dots(str)}</p>
+      </div>`;
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Floating Hearts Trail</title>
+<style>
+  /* Page look (optional) */
+  :root {
+    --bg: radial-gradient(1000px 600px at 20% 20%, #111 0%, #0a0a0a 40%, #000 100%);
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  body {
+    background: var(--bg);
+    /* overflow: hidden;             keep hearts within viewport */
+    font-family: system-ui, Arial, sans-serif;
+    cursor: crosshair;            /* fun cursor */
+  }
+
+  /* Heart elements */
+  .heart {
+    position: fixed;              /* position relative to viewport */
+    left: 0; top: 0;
+    transform: translate(-50%, -50%) scale(1);
+    font-size: 16px;
+    line-height: 1;
+    will-change: transform, opacity;
+    pointer-events: none;         /* don't block clicks/hover */
+    animation: floatUp 900ms ease-out forwards;
+    text-shadow: 0 2px 6px rgba(0,0,0,.35);
+    user-select: none;
+  }
+
+  /* Float + fade animation */
+  @keyframes floatUp {
+    0%   { transform: translate(-50%, -50%) translateY(0)    scale(0.6); opacity: 1; }
+    50%   { transform: translate(-50%, -50%) translateY(0)    scale(0.9); opacity: .8; }
+    70%  { transform: translate(-50%, -50%) translateY(-100px) scale(1.05); opacity: .9; }
+    100% { transform: translate(-50%, -50%) translateY(-200px) scale(0.9); opacity: 0; }
+  }
+
+  /* Optional headline (demo content) */
+  .center {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    color: #e6e6e6; text-align: center;
+  }
+  .center h1 { font-weight: 700; margin: 0 1rem; }
+  .center p  { opacity: .6; margin-top: .5rem; }
+</style>
+</head>
+<body>
+  <div class="center">
+    <div>
+      <h1>Move your mouse to sprinkle ❤️</h1>
+      <h2>Sai charan</h2>
+      <p>(Works on touch too!)</p>
+    </div>
+  </div>
+
+<script>
+(() => {
+  // Config you can tweak
+  const MIN_SIZE = 12;   // px
+  const MAX_SIZE = 28;   // px
+  const MIN_SPREAD = -14; // px random horizontal drift
+  const MAX_SPREAD = 14;  // px
+  const MAX_PER_SECOND = 80; // throttle overall spawns
+  const SPAWN_INTERVAL_MS = 10; // min gap between spawns
+
+  let lastSpawn = 0;
+  let lastFrame = 0;
+  let tokens = MAX_PER_SECOND;
+  let lastTokenRefill = performance.now();
+
+  // Refill tokens smoothly (token bucket) to limit CPU on wild mouse moves
+  function refillTokens() {
+    const now = performance.now();
+    const delta = now - lastTokenRefill;
+    const perMs = MAX_PER_SECOND / 1000;
+    tokens = Math.min(MAX_PER_SECOND, tokens + delta * perMs);
+    lastTokenRefill = now;
+  }
+
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+
+  function spawnHeart(x, y) {
+    const el = document.createElement('span');
+    el.className = 'heart';
+    el.textContent = '❤';
+
+    // Size & color
+    const size = rand(MIN_SIZE, MAX_SIZE);
+    el.style.fontSize = size + 'px';
+    const hue = Math.floor(rand(330, 390)) % 360; // pink-red range
+    el.style.color = `hsl(${hue} 90% 60%)`;
+
+    // Random slight horizontal drift using translateX on start
+    const dx = rand(MIN_SPREAD, MAX_SPREAD);
+    el.style.transform = `translate(-50%, -50%) translateX(${dx}px)`;
+
+    // Position at pointer
+    el.style.left = x + 'px';
+    el.style.top  = y + 'px';
+
+    // Remove when animation ends
+    el.addEventListener('animationend', () => el.remove(), { once: true });
+
+    document.body.appendChild(el);
+  }
+
+  let queuedEvent = null;
+  function onMove(e) {
+    queuedEvent = e;
+    requestAnimationFrame(tick);
+  }
+
+  function tick(ts) {
+    if (ts === lastFrame) return;
+    lastFrame = ts;
+
+    if (!queuedEvent) return;
+
+    refillTokens();
+
+    const now = performance.now();
+    // Basic spawn throttles
+    if (tokens < 1 || now - lastSpawn < SPAWN_INTERVAL_MS) return;
+
+    const e = queuedEvent;
+    const x = (e.touches && e.touches[0]?.clientX) ?? e.clientX;
+    const y = (e.touches && e.touches[0]?.clientY) ?? e.clientY;
+
+    spawnHeart(x, y);
+    tokens -= 1;
+    lastSpawn = now;
+  }
+
+  // Support mouse and touch
+  addEventListener('pointermove', onMove, { passive: true });
+  addEventListener('touchmove', onMove, { passive: true });
+
+  // Optional: a little burst when you click/tap
+  function burst(x, y, n = 10) {
+    for (let i = 0; i < n; i++) {
+      setTimeout(() => spawnHeart(x + rand(-10, 10), y + rand(-10, 10)), i * 25);
+    }
+  }
+  addEventListener('pointerdown', e => burst(e.clientX, e.clientY));
+  addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    if (t) burst(t.clientX, t.clientY);
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

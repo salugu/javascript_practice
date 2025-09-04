@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+</head>
+<body>
+    <script src="test.js"></script>
+    
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="bullet">
+
+    </ul>
+    <script>
+        let bullet=document.getElementById("bullet");
+        let products = ["Laptop", "Mobile", "Camera", "Shoes", "Earphones"];
+        for(let i=0;i<products.length;i++){
+        bullet.innerHTML += `<li>${products[i]}</li>`;
+}
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+<table border="1">
+<thead>
+<tr>
+<td>Orginal price</td>
+<td>Discount price</td>
+</tr>
+</thead>
+<tbody id="data">
+<tr>
+</tr>
+</tbody>
+</table>
+<script>
+let data = document.getElementById("data");
+let prices = [1000, 2000, 3000, 1500];
+for (let i = 0; i < prices.length; i++) {
+data.innerHTML += `<tr><td>${prices[i]}</td> <td>${prices[i]*0.90}</td></tr>`;
+}
+</script>
+</body>
+</html> 
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+div {
+width: 200px;
+height: 200px;
+border: solid 2px black;
+}
+</style>
+</head>
+<body>
+<div id="productcontainer">
+</div>
+<script>
+let productcontainer = document.getElementById("productcontainer")
+let p = [
+{ name: "Shirt", price: 500, category: "Clothing" },
+{ name: "Watch", price: 1200, category: "Accessories" }
+];
+for (let i = 0; i < p.length; i++) {
+productcontainer.innerHTML += `<div>
+<h2> ${p[i].name} </h2>
+<p> price: ${p[i].price}<p>
+<p>category: ${p[i].category}`;
+}
+</script>
+</body>
+</html> 
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+<table border="5">
+<thead>
+<tr>
+<td>S.no</td>
+<td>product</td>
+<td>Quantity</td>
+<td>price</td>
+<td>Total</td>
+</tr>
+</thead>
+<tbody id="data">
+</tbody>
+</table>
+<script>
+let d = document.getElementById("d");
+let array = [
+{ product: "mobile", quantity: "6", price: "5000" },
+{ product: "computer", quantity: "6", price: "10000" },
+{ product: "watch", quantity: "6", price: "1000" },
+]
+for (let i = 0; i < array.length; i++) {
+data.innerHTML += `<tr><td> ${i + 1}</td> 
+<td>${array[i].product}</td> 
+<td>${array[i].quantity}</td> 
+<td> ${array[i].price}</td>
+<td> ${array[i].quantity * array[i].price}</tr>`;
+}
+</script>
+</body>
+</html> 
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+<div id="da">
+</div>
+<script>
+let da= document.getElementById("da");
+let a=[
+{ name: "Keyboard", stock: 3 },
+{ name: "Mouse", stock: 0 },
+{ name: "Charger", stock: 2 }
+];
+for(let i=0;i<a.length;i++){
+if(a[i].stock > 0){
+da.innerHTML += `<h1> ${a[i].name}</h1>`;
+}
+}
+</script>
+</body>
+</html> 
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+<div id="countdown"></div>
+<script>
+let countdown= document.getElementById("countdown");
+let x=10;
+while(x>0){
+countdown.innerHTML += `<h6> ${x}</h6>`;
+x--;
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+<div id="product">
+</div>
+<script>
+let product = document.getElementById("product");
+let array = ["phone", "laptop", "computer","alarm", "camera", "tab"];
+for (let i = 0; i < array.length; i++) {
+if (array[i] == "camera") {
+product.innerHTML += `<h5>${array[i]}</h5>`;
+break;
+}
+else
+product.innerHTML += `<h5>${array[i]}</h5>`;
+}
+</script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+<div id="cart"></div>
+<script>
+let cart = document.getElementById("cart");
+let arr= [499, 299, 1299, 999];
+let i = 0, total = 0;
+let size = arr.length;
+while(i<size) {
+total+=arr[i];
+i++;
+}
+cart.innerHTML += `<h3>total: ${total} </h3>`;
+</script>
+</body>
+</html  -->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+<div id="data"></div>
+<script>
+let product = document.getElementById("data");
+let array = [
+{ name: "cpu", stock: 6},
+{ name: "charger", stock: 4 },
+{ name: "watch", stock: 21},
+{ name: "Keyboard", stock: 0 },
+{ name: "Mouse", stock: 0 },
+{ name: "mobile", stock: 2 }
+];
+let i = 0;
+while (array[i].stock) {
+product.innerHTML += `<h1> Product Name: ${array[i].name}</h1>`;
+i++;
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="product"></div>
+    <script>
+        let product=document.getElementById("product");
+let array = [
+{ name: "computer", stock: 3 },
+{ name: "Mouse", stock: 9 },
+{ name: "cpu", stock:2},
+{ name: "mobile", stock:3 },
+{ name: "laptop", stock:9 },
+{ name: "watch", stock: 2},
+{ name: "fan", stock: 4},
+];
+for (let i = 0; i < 3; i++) {
+product.innerHTML += `<ul> <li>${array[i].name}</li> </ul>`;
+}
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div >
+        <ol id="cart">
+
+        </ol>
+    </div>
+    <script>
+        let cart = document.getElementById("cart");
+        let item = 5;
+        let h = [];
+        while (item > 0) {
+            let user_input = prompt("Enter h:");
+            h.push(user_input);
+            item--;
+        }
+        for (let i = 0; i < h.length; i++)
+        cart.innerHTML += `<li>${h[i]}</li>`;
+        </script>
+
+</body>
+</html> -->
+
+
+
+
+<!-- Show Cart Status At Least Once -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+<div id="cart"></div>
+<script>
+let cart = document.getElementById("cart");
+let items = [];
+let size = cart.length;
+do {
+cart.innerText += `cart is empty`;
+size--;
+} while (size > 0);
+if (size)
+cart.innerHTML += `<h6>cart is filled with items; ${size} </h6>`;
+else
+cart.innerHTML += `<h3> Add items to cart</h3>`;
+</script>
+</body>
+</html> -->
+
+
+
+
+<!-- Show Cart Status At Least Once -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="product"></div>
+    <script>
+        let product=document.getElementById("product");
+        let prices=[1000,3400,5433,9999,8888];
+        let i=0;
+        do{
+            product.innerHTML += `<h3>originalprice ${prices[i]} after 20% discount ${prices[i]*0.80}</h3>`;
+            i++;
+        } while (i < prices.length);
+    </script>
+</body>
+</html> -->
+
+
+
+
+<!-- Flash Sale Display -->/
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my assignment</title>
+ </head>
+ <body>
+    <script src="myassignment_looping.js"></script>
+
+ </body>
+ </html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
