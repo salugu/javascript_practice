@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="increament(35)">Increament</button>
+    <button onclick="decreament(45)">Decreament</button>
+     <button id="value">values</button>
+    <script>
+    let value = document.getElementById('value');
+    function increament(s) {
+        for(let i = 1; i < s; i++) {
+            value.innerHTML += `<div>${i}</div>`;
+        }
+    }
+    function decreament(s) {
+        for(let i = s; i >= 0; i--) {
+            value.innerHTML += `<div>${i}</div>`;
+        }
+    }
+    </script>
+</body>
+
+</html>
